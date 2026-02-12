@@ -1,0 +1,63 @@
+# 3-3 My Own List - Transportation (PEP 8 Version)
+
+vehicles = ["Tesla Model S", "Ford Mustang", "BMW M4"]
+
+for vehicle in vehicles:
+    print(f"I would love to own a {vehicle} someday.")
+I would love to own a Tesla Model S someday.
+I would love to own a Ford Mustang someday.
+I would love to own a BMW M4 someday.
+
+# 3-4 / 3-8 Guest List - PEP 8 Version
+
+guests = ["Lady Gaga", "Steve Jobs", "Betty White"]
+
+# Original invitations
+for person in guests:
+    print(
+        f"Hey {person}, you're invited to dinner at my place. "
+        "It would be awesome to have you there!"
+    )
+
+print("\nGood news — I found a bigger dinner table!\n")
+
+# Add three new guests
+guests.insert(0, "Dolly Parton")              # beginning
+guests.insert(len(guests) // 2, "Robin Williams")  # middle
+guests.append("Elon Musk")                   # end
+
+# Sort alphabetically
+guests.sort()
+
+# Updated invitations (sorted)
+for person in guests:
+    print(
+        f"Hey {person}, you're invited to dinner at my place. "
+        "I'm excited to have you join!"
+Good news — I found a bigger dinner table!
+
+Hey Betty White, you're invited to dinner at my place. I'm excited to have you join!
+Hey Dolly Parton, you're invited to dinner at my place. I'm excited to have you join!
+Hey Elon Musk, you're invited to dinner at my place. I'm excited to have you join!
+Hey Lady Gaga, you're invited to dinner at my place. I'm excited to have you join!
+Hey Robin Williams, you're invited to dinner at my place. I'm excited to have you join!
+Hey Steve Jobs, you're invited to dinner at my place. I'm excited to have you join!
+
+# 4-2 Animals - PEP 8 Version
+
+animals = ["dog", "cat", "rabbit"]
+
+for animal in animals:
+    print(animal)
+
+print()
+
+for animal in animals:
+    print(f"A {animal} would make a great pet.")
+
+print("\nAny of these animals would make a great pet!")
+A dog would make a great pet.
+A cat would make a great pet.
+A rabbit would make a great pet.
+
+Any of these animals would make a great pet!
