@@ -1,0 +1,18 @@
+# 10-6. Addition
+
+try:
+    num1 = int(input("Enter the first number: "))
+    num2 = int(input("Enter the second number: "))
+
+    result = num1 + num2
+    print("The sum is:", result)
+
+except ValueError:
+    print("Oops! Please enter valid numbers only.")
+
+      Enter the first number: 5
+Enter the second number: 10
+The sum is: 15
+PS C:\Users\fishyegm> & C:/Users/fishyegm/AppData/Local/Microsoft/WindowsApps/python3.13.exe c:/Users/fishyegm/Downloads/addition.py
+Enter the first number: hello
+Oops! Please enter valid numbers only.
