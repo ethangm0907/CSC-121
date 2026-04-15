@@ -1,0 +1,21 @@
+# 10-4. Guest Book
+
+print("Welcome to the Guest Book! (type 'quit' to stop)\n")
+
+while True:
+    name = input("Enter your name: ")
+
+    if name.lower() == "quit":
+        print("Goodbye!")
+        break
+
+    print(f"Hello {name}, thanks for visiting!\n")
+
+    with open("guest_book.txt", "a") as file:
+        file.write(name + "\n")
+
+          Enter your name: Ethan
+Hello Ethan, thanks for visiting!
+Enter your name: Alex
+Hello Alex, thanks for visiting!
+Enter your name: quit
