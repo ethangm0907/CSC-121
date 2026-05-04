@@ -1,0 +1,129 @@
+# Space Aliens Game Final Project
+# CSC-121
+# Ethan Miller
+
+import pygame
+import sys
+
+
+class SpaceAliensGame:
+    """A simple space aliens shooting game."""
+
+    def __init__(self):
+        pygame.init()
+
+        self.screen_width = 800
+        self.screen_height = 600
+        self.screen = pygame.display.set_mode(
+            (self.screen_width, self.screen_height)
+        )
+        pygame.display.set_caption("Space Aliens Game")
+
+        self.clock = pygame.time.Clock()
+        self.bg_color = (20, 20, 40)
+
+        self.ship = pygame.Rect(370, 520, 60, 40)
+        self.ship_speed = 6
+
+        self.bullets = []
+        self.bullet_speed = 8
+
+        self.aliens = []
+        self.alien_speed = 2
+        self.create_aliens()
+
+        self.score = 0
+        self.font = pygame.font.SysFont(None, 36)
+
+    def create_aliens(self):
+        """Create rows of aliens."""
+        for row in range(3):
+            for col in range(8):
+                alien = pygame.Rect(80 + col * 80, 60 + row * 60, 40, 30)
+                self.aliens.append(alien)
+
+    def run_game(self):
+        """Main game loop."""
+        while True:
+            self.check_events()
+            self.update_bullets()
+            self.update_aliens()
+            self.update_screen()
+            self.clock.tick(60)
+
+    def check_events(self):
+        """Respond to key presses and quit events."""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.fire_bullet()
+
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_LEFT] and self.ship.left > 0:
+            self.ship.x -= self.ship_speed
+
+        if keys[pygame.K_RIGHT] and self.ship.right < self.screen_width:
+            self.ship.x += self.ship_speed
+
+    def fire_bullet(self):
+        """Create a bullet from the ship."""
+        bullet = pygame.Rect(self.ship.centerx - 3, self.ship.top, 6, 15)
+        self.bullets.append(bullet)
+
+    def update_bullets(self):
+        """Move bullets and check for alien collisions."""
+        for bullet in self.bullets[:]:
+            bullet.y -= self.bullet_speed
+
+            if bullet.bottom < 0:
+                self.bullets.remove(bullet)
+
+        for bullet in self.bullets[:]:
+            for alien in self.aliens[:]:
+                if bullet.colliderect(alien):
+                    self.bullets.remove(bullet)
+                    self.aliens.remove(alien)
+                    self.score += 10
+                    break
+
+    def update_aliens(self):
+        """Move aliens side to side."""
+        move_down = False
+
+        for alien in self.aliens:
+            alien.x += self.alien_speed
+
+            if alien.right >= self.screen_width or alien.left <= 0:
+                move_down = True
+
+        if move_down:
+            self.alien_speed *= -1
+
+            for alien in self.aliens:
+                alien.y += 20
+
+    def update_screen(self):
+        """Draw everything on the screen."""
+        self.screen.fill(self.bg_color)
+
+        pygame.draw.rect(self.screen, (0, 200, 255), self.ship)
+
+        for bullet in self.bullets:
+            pygame.draw.rect(self.screen, (255, 255, 0), bullet)
+
+        for alien in self.aliens:
+            pygame.draw.rect(self.screen, (0, 255, 100), alien)
+
+        score_text = self.font.render(f"Score: {self.score}", True, (255, 255, 255))
+        self.screen.blit(score_text, (10, 10))
+
+        pygame.display.flip()
+
+
+if __name__ == "__main__":
+    game = SpaceAliensGame()
+    game.run_game()
